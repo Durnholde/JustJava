@@ -19,7 +19,10 @@ import java.text.NumberFormat;
 /**
  * This app displays an order form to order coffee.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
+    int quantity = 0;
+    int price = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,32 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int numberOfCoffees = 2;
-        display(numberOfCoffees);
-        displayPrice(numberOfCoffees*5);
+        String priceMessage = "Total: $" + price*quantity + "\nThank you!";
+        displayMessage(priceMessage);
+    }
+
+    /**
+     * This method is called when the + button is clicked.
+     */
+    public void increment(View view) {
+        quantity++;
+        display(quantity);
+    }
+
+    /**
+     * This method is called when the - button is clicked.
+     */
+    public void decrement(View view) {
+        quantity--;
+        display(quantity);
+    }
+
+    /**
+     * This method displays the given quantity value on the screen.
+     */
+    private void display(int number) {
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        quantityTextView.setText("" + number);
     }
 
     /**
@@ -45,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * This method displays the given quantity value on the screen.
+     * This method displays the given text on the screen.
      */
-    private void display(int number) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
     }
 }
